@@ -1,0 +1,212 @@
+//see output.txt to see the outputs.
+import dUtils.Array.dArray;
+
+// Create
+var da:dArray = new dArray(10, "hello", true, 42, "world", false, 42);
+
+// Wrap a native array
+var native:Array = [1, 2, 3];
+var da2:dArray = new dArray(native);
+
+
+// includes
+
+var r1 = da.includes("hello");
+trace("includes('hello')  found=" + r1.found + "  index=" + r1.index);
+// found=true  index=1
+
+var r2 = da.includes(42);
+trace("includes(42)       found=" + r2.found + "  index=" + r2.index);
+// found=true  index=3
+
+var r3 = da.includes("42");   // "42" (String) != 42 (Number)
+trace("includes('42')     found=" + r3.found + "  index=" + r3.index);
+// found=false  index=-1
+
+var r4 = da.includes(true);
+trace("includes(true)     found=" + r4.found + "  index=" + r4.index);
+// found=true  index=2
+
+var r5 = da.includes(99);
+trace("includes(99)       found=" + r5.found + "  index=" + r5.index);
+// found=false  index=-1
+
+// Search from a specific position
+var r6 = da.includes(42, 4);
+trace("includes(42, 4)    found=" + r6.found + "  index=" + r6.index);
+// found=true  index=6  (second 42)
+
+// Negative fromIndex counts from the end
+var r7 = da.includes(42, -3);
+trace("includes(42, -3)   found=" + r7.found + "  index=" + r7.index);
+// found=true  index=6
+
+
+// indexOf / lastIndexOf
+
+trace("indexOf('hello')  = " + da.indexOf("hello"));   // 1
+trace("indexOf(42)       = " + da.indexOf(42));         // 3
+trace("lastIndexOf(42)   = " + da.lastIndexOf(42));     // 6
+trace("indexOf(999)      = " + da.indexOf(999));        // -1
+
+
+// every / some
+
+function isNumber(item, idx, arr):Boolean { return typeof(item) == "number"; }
+function isString(item, idx, arr):Boolean { return typeof(item) == "string"; }
+
+trace("every(isNumber) = " + da.every(isNumber));   // false
+trace("some(isNumber)  = " + da.some(isNumber));    // true
+
+
+// filter
+
+var numbers:dArray = da.filter(isNumber);
+trace("filter(isNumber) = " + numbers.toString());   // 10,42,42
+
+
+// map
+
+function doubleNum(item, idx, arr) {
+    return typeof(item) == "number" ? item * 2 : item;
+}
+var doubled:dArray = da.map(doubleNum);
+trace("map(doubleNum) = " + doubled.toString());   // 20,hello,true,84,world,false,84
+
+
+// forEach
+
+da.forEach(function(item, idx, arr):Void {
+    // trace("  [" + idx + "] " + item);
+});
+
+
+// find / findIndex
+
+var found    = da.find(isNumber);
+var foundIdx = da.findIndex(isNumber);
+trace("find(isNumber)      = " + found);      // 10
+trace("findIndex(isNumber) = " + foundIdx);   // 0
+
+
+// flat
+
+var nested:dArray = new dArray(1, [2, 3, [4, 5]], 6);
+trace("flat(1) = " + nested.flat().toString());    // 1,2,3,4 5,6
+trace("flat(2) = " + nested.flat(2).toString());   // 1,2,3,4,5,6
+
+
+// fill
+
+var da3:dArray = new dArray(1, 2, 3, 4, 5);
+da3.fill(0, 1, 3);
+trace("fill(0,1,3) = " + da3.toString());   // 1,0,0,4,5
+
+
+// at
+
+trace("at(0)  = " + da.at(0));    // 10
+trace("at(-1) = " + da.at(-1));   // 42
+
+
+// copyWithin
+
+var da4:dArray = new dArray(1, 2, 3, 4, 5);
+da4.copyWithin(0, 3);
+trace("copyWithin(0,3) = " + da4.toString());   // 4,5,3,4,5
+
+
+// concat
+
+var a:dArray = new dArray(1, 2);
+var b:dArray = new dArray(3, 4);
+trace("concat = " + a.concat(b).toString());   // 1,2,3,4
+
+
+// sort
+
+var da5:dArray = new dArray(30, 10, 20);
+da5.sort(function(x, y):Number { return x - y; });
+trace("sort asc = " + da5.toString());   // 10,20,30
+
+
+// toArray
+
+var native2:Array = da.toArray();
+trace("toArray length = " + native2.length);
+
+
+// eitherHas
+// better than char == 1 || char == 2 || char == "ok" || char == true
+
+var keys:dArray = new dArray(1, 2, "ok", true);
+
+var char1 = 2;
+trace("eitherHas(2)    = " + keys.eitherHas(char1));   // true
+
+var char2:String = "ok";
+trace("eitherHas('ok') = " + keys.eitherHas(char2));   // true
+
+var char3:Boolean = true;
+trace("eitherHas(true) = " + keys.eitherHas(char3));   // true
+
+var char4 = 99;
+trace("eitherHas(99)   = " + keys.eitherHas(char4));   // false
+
+var char5:String = "2";
+trace("eitherHas('2')  = " + keys.eitherHas(char5));   // false  (strict type)
+
+var input:String = "ok";
+if (keys.eitherHas(input)) {
+    trace("input is a valid key");
+}
+
+
+//use auto darray to array (testing)
+dArray.install();
+
+var plain:Array = [1, 2, "ok", true, 42];
+
+trace("plain.eitherHas(2)    = " + plain.eitherHas(2));      // true
+trace("plain.eitherHas('ok') = " + plain.eitherHas("ok"));   // true
+trace("plain.eitherHas(true) = " + plain.eitherHas(true));   // true
+trace("plain.eitherHas(99)   = " + plain.eitherHas(99));     // false
+trace("plain.eitherHas('2')  = " + plain.eitherHas("2"));    // false  (strict)
+
+var ri = plain.includes("ok");
+trace("plain.includes('ok')  = found:" + ri.found + " index:" + ri.index);   // found:true index:2
+
+trace("plain.indexOf(42)       = " + plain.indexOf(42));        // 4
+trace("plain.lastIndexOf(2)    = " + plain.lastIndexOf(2));     // 1
+trace("plain.every(isNumber)   = " + plain.every(isNumber));    // false
+trace("plain.some(isNumber)    = " + plain.some(isNumber));     // true
+
+var nums:Array = plain.filter(isNumber);
+trace("plain.filter(isNumber) = " + nums);   // 1,2,42
+
+var doubled2:Array = plain.map(function(v, i, a){ return typeof(v) == "number" ? v * 2 : v; });
+trace("plain.map(double)      = " + doubled2);   // 2,4,ok,true,84
+
+plain.forEach(function(v, i, a):Void {
+    // trace("  [" + i + "] = " + v);
+});
+
+trace("plain.find(isNumber)      = " + plain.find(isNumber));        // 1
+trace("plain.findIndex(isNumber) = " + plain.findIndex(isNumber));   // 0
+
+var nested2:Array = [1, [2, 3, [4, 5]], 6];
+trace("nested.flat()   = " + nested2.flat());      // 1,2,3,4 5,6
+trace("nested.flat(2)  = " + nested2.flat(2));     // 1,2,3,4,5,6
+
+var fillMe:Array = [1, 2, 3, 4, 5];
+fillMe.fill(0, 1, 3);
+trace("plain.fill(0,1,3)     = " + fillMe);   // 1,0,0,4,5
+
+trace("plain.at(-1)          = " + plain.at(-1));   // 42
+
+var cwArr:Array = [1, 2, 3, 4, 5];
+cwArr.copyWithin(0, 3);
+trace("plain.copyWithin(0,3) = " + cwArr);   // 4,5,3,4,5
+
+var copy:Array = plain.toArray();
+trace("plain.toArray().length = " + copy.length);   // 5

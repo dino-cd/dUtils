@@ -1,0 +1,53 @@
+testing the dmd this is what the output should say.
+includes('hello')  found=true  index=1
+includes(42)       found=true  index=3
+includes('42')     found=false  index=-1
+includes(true)     found=true  index=2
+includes(99)       found=false  index=-1
+includes(42, 4)    found=true  index=6
+includes(42, -3)   found=true  index=6
+indexOf('hello')  = 1
+indexOf(42)       = 3
+lastIndexOf(42)   = 6
+indexOf(999)      = -1
+every(isNumber) = false
+some(isNumber)  = true
+filter(isNumber) = 10,42,42
+map(doubleNum) = 20,hello,true,84,world,false,84
+find(isNumber)      = 10
+findIndex(isNumber) = 0
+flat(1) = 1,2,3,4,5,6
+flat(2) = 1,2,3,4,5,6
+fill(0,1,3) = 1,0,0,4,5
+at(0)  = 10
+at(-1) = 42
+copyWithin(0,3) = 4,5,3,4,5
+concat = 1,2,3,4
+sort asc = 10,20,30
+toArray length = 7
+eitherHas(2)    = true
+eitherHas('ok') = true
+eitherHas(true) = true
+eitherHas(99)   = false
+eitherHas('2')  = false
+input is a valid key
+plain.eitherHas(2)    = true
+plain.eitherHas('ok') = true
+plain.eitherHas(true) = true
+plain.eitherHas(99)   = false
+plain.eitherHas('2')  = false
+plain.includes('ok')  = found:true index:2
+plain.indexOf(42)       = 4
+plain.lastIndexOf(2)    = 1
+plain.every(isNumber)   = false
+plain.some(isNumber)    = true
+plain.filter(isNumber) = 1,2,42
+plain.map(double)      = 2,4,ok,true,84
+plain.find(isNumber)      = 1
+plain.findIndex(isNumber) = 0
+nested.flat()   = 1,2,3,4,5,6
+nested.flat(2)  = 1,2,3,4,5,6
+plain.fill(0,1,3)     = 1,0,0,4,5
+plain.at(-1)          = 42
+plain.copyWithin(0,3) = 4,5,3,4,5
+plain.toArray().length = 5
