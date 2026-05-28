@@ -1,0 +1,111 @@
+import dUtils.functions.Sequencer;
+//variables and function are purely for example so..!
+
+//1
+
+Sequencer.Start(this, function() {
+	Sequencer.Call(playLevel, [id]);
+	Sequencer.Wait(100);
+	Sequencer.Wrap(function(){ _root.removeMovieClip("menu"); });
+	Sequencer.Call(cleanup);
+	Sequencer.Wrap(function(){ screen.gotoAndPlay(id); });
+});
+
+//2
+
+Sequencer.Start(this, function() {
+	Sequencer.Wrap(function(){ _root.gotoAndStop("intro"); });
+	Sequencer.Wait(3000);
+	Sequencer.Wrap(function(){ _root.gotoAndStop("gameplay"); });
+});
+
+//3
+
+Sequencer.Start(this, function() {
+	Sequencer.Wrap(function(){ message_txt.text = "Get ready!"; });
+	Sequencer.Wait(1500);
+	Sequencer.Wrap(function(){ message_txt.text = "GO!"; });
+	Sequencer.Wait(800);
+	Sequencer.Wrap(function(){ message_txt.text = ""; });
+});
+
+//4
+
+function showIntro():Void	{ _root.gotoAndStop("intro"); }
+function startGame():Void	{ _root.gotoAndStop("game"); }
+function playMusic():Void	{ mySound.start();}
+function stopMusic():Void	{ mySound.stop();}
+
+Sequencer.Start(this, function() {
+	Sequencer.Call(showIntro);
+	Sequencer.Wait(4000);
+	Sequencer.Call(stopMusic);
+	Sequencer.Wait(500);
+	Sequencer.Call(playMusic);
+	Sequencer.Call(startGame);
+});
+
+//5
+
+function setAlpha(clip:MovieClip, value:Number):Void {
+	clip._alpha = value;
+}
+
+Sequencer.Start(this, function() {
+	Sequencer.Call(setAlpha, [player_mc, 0]);
+	Sequencer.Wait(500);
+	Sequencer.Call(setAlpha, [player_mc, 100]);
+});
+
+//6
+
+Sequencer.Start(this, function() {
+	Sequencer.Repeat(3, function() {
+		Sequencer.Wrap(function(){ coin_mc._visible = false; });
+		Sequencer.Wait(200);
+		Sequencer.Wrap(function(){ coin_mc._visible = true; });
+		Sequencer.Wait(200);
+	});
+});
+
+//7
+
+Sequencer.Start(this, function() {
+	Sequencer.Repeat(-1, function() {
+		Sequencer.Wrap(function(){ bg_mc._alpha = 100; });
+		Sequencer.Wait(800);
+		Sequencer.Wrap(function(){ bg_mc._alpha = 40; });
+		Sequencer.Wait(800);
+	});
+});
+
+stopBtn_btn.onPress = function():Void {
+	Sequencer.Cancel();
+};
+
+//8
+
+Sequencer.Start(this, function() {
+	Sequencer.Call(showIntro);
+	Sequencer.Wait(5000);
+	Sequencer.Call(startGame);
+});
+
+skipBtn_btn.onPress = function():Void {
+	Sequencer.Cancel();
+	startGame();
+};
+
+//9
+
+function triggerExplosion():Void{explosion_mc.gotoAndPlay(1);}
+function removeExplosion():Void{explosion_mc._visible = false;}
+function spawnNextWave():Void{ _root.gotoAndPlay("wave2");}
+
+Sequencer.Start(this, function() {
+	Sequencer.Call(triggerExplosion);
+	Sequencer.Wait(1200);
+	Sequencer.Call(removeExplosion);
+	Sequencer.Wait(500);
+	Sequencer.Call(spawnNextWave);
+});
