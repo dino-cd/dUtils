@@ -15,6 +15,7 @@ Output: [output](https://github.com/dino-cd/dUtils/blob/main/dUtils/Array/output
 ## functions
 ### Sequencer
 Libraries to sequence actions with delays and repeats allowing dynamic usage.
+
 `import dUtils.functions.Sequencer`
 
 Example of Usage:
