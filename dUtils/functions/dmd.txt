@@ -31,10 +31,10 @@ Sequencer.Start(this, function() {
 
 //4
 
-function showIntro():Void	{ _root.gotoAndStop("intro"); }
-function startGame():Void	{ _root.gotoAndStop("game"); }
-function playMusic():Void	{ mySound.start();}
-function stopMusic():Void	{ mySound.stop();}
+function showIntro():Void{_root.gotoAndStop("intro");}
+function startGame():Void{_root.gotoAndStop("game");}
+function playMusic():Void{mySound.start();}
+function stopMusic():Void{mySound.stop();}                 //someone please test these... for outputs..
 
 Sequencer.Start(this, function() {
 	Sequencer.Call(showIntro);
