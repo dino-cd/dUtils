@@ -1,0 +1,180 @@
+import dUtils.functions.Vector2D;
+var pos:Vector2D = new Vector2D(100, 200);
+var vel:Vector2D = new Vector2D(3, -1.5);
+var target:Vector2D = new Vector2D(400, 300);
+trace(pos);
+// Vector2D(100, 200)
+
+var moved:Vector2D = pos.add(vel);
+trace(moved);
+// Vector2D(103, 198.5)
+
+pos.addLocal(vel);
+trace(pos);
+// Vector2D(103, 198.5)
+
+var diff:Vector2D = target.sub(pos);
+trace(diff);
+// Vector2D(297, 101.5)
+
+var scaled:Vector2D = vel.scale(5);
+trace(scaled);
+// Vector2D(15, -7.5)
+
+var speed:Number = vel.magnitude();
+trace(speed);
+// 3.354...
+
+var dir:Vector2D = vel.normalize();
+trace(dir);
+// Vector2D(0.894..., -0.447...)
+trace(dir.magnitude());
+// 1 (unit vector)
+
+vel.setMagnitude(10);
+trace(vel.magnitude());
+// 10
+
+trace(pos.distanceTo(target));
+
+trace(Vector2D.distance(pos, target));
+var forward:Vector2D = new Vector2D(1, 0);
+
+trace(forward.angleDeg());
+// 0
+
+var rotated:Vector2D = forward.rotateDeg(45);
+trace(rotated);
+// Vector2D(0.707..., 0.707...)
+
+var toTarget:Number = pos.angleTo(target);
+trace(toTarget * (180 / Math.PI));
+
+var a:Vector2D = new Vector2D(1, 0);
+var b:Vector2D = new Vector2D(0, 1);
+trace(Vector2D.angleBetweenStatic(a, b) * (180 / Math.PI));
+// 90
+
+var v1:Vector2D = new Vector2D(1, 0);
+var v2:Vector2D = new Vector2D(0, 1);
+
+trace(v1.dot(v2));
+// 0
+
+trace(v1.dot(v1));
+// 1
+trace(v1.cross(v2));
+// 1
+
+trace(v2.cross(v1));
+// -1
+
+var ball:Vector2D = new Vector2D(1, 1);
+var wallNormal:Vector2D = new Vector2D(0, -1);
+
+var bounced:Vector2D = ball.reflect(wallNormal);
+trace(bounced);
+// Vector2D(1, -1)
+
+var motion:Vector2D = new Vector2D(3, 4);
+var axis:Vector2D   = new Vector2D(1, 0);
+
+trace(motion.project(axis));
+// Vector2D(3, 0)
+
+trace(motion.reject(axis));
+// Vector2D(0, 4)
+
+var right:Vector2D = new Vector2D(1, 0);
+trace(right.perpendicular());
+// Vector2D(0, 1)
+
+trace(right.perpendicularCW());
+// Vector2D(0, -1)
+
+var start:Vector2D = new Vector2D(0, 0);
+var end:Vector2D   = new Vector2D(100, 100);
+
+trace(start.lerp(end, 0.5));
+// Vector2D(50, 50)
+
+trace(Vector2D.lerpStatic(start, end, 0.25));
+// Vector2D(25, 25)
+
+var big:Vector2D = new Vector2D(100, 100);
+trace(big.clampMagnitude(10));
+big.limit(5);
+trace(big.magnitude());
+// 5
+
+var fromAngle:Vector2D = Vector2D.fromAngle(Math.PI / 4);
+trace(fromAngle);
+// Vector2D(0.707..., 0.707...)
+
+var fromAngleDeg:Vector2D = Vector2D.fromAngleDeg(90, 50);
+trace(fromAngleDeg);
+// Vector2D(~0, 50)
+
+var rnd:Vector2D = Vector2D.random(10);
+trace(rnd.magnitude());
+// 10
+
+var fromArr:Vector2D = Vector2D.fromArray([7, 3]);
+trace(fromArr);
+// Vector2D(7, 3)
+
+trace(Vector2D.ZERO);
+// Vector2D(0, 0)
+
+trace(Vector2D.UP);
+// Vector2D(0, -1)
+
+trace(Vector2D.RIGHT);
+// Vector2D(1, 0)
+
+var za:Vector2D = new Vector2D(0, 0);
+trace(za.isZero());
+// true
+
+var va:Vector2D = new Vector2D(1.00001, 2.00001);
+var vb:Vector2D = new Vector2D(1, 2);
+trace(va.equals(vb));
+// false
+
+trace(va.equalsEpsilon(vb, 0.001));
+// true
+
+var enemy:Vector2D = new Vector2D(50, 50);
+var player:Vector2D = new Vector2D(300, 200);
+var enemySpeed:Number = 2;
+
+var toPlayer:Vector2D = player.sub(enemy).normalize().scale(enemySpeed);
+enemy.addLocal(toPlayer);
+
+trace(enemy);
+
+var center:Vector2D = new Vector2D(200, 200);
+var angle:Number = 0;
+var radius:Number = 80;
+
+var ballVel:Vector2D = new Vector2D(4, 3);
+var floorNormal:Vector2D = Vector2D.UP;
+
+if (ballVel.dot(floorNormal) < 0) {
+	ballVel = ballVel.reflect(floorNormal);
+}
+
+trace(ballVel);
+// Vector2D(4, -3)
+
+trace(vel.negate());
+// negated
+
+trace(vel.abs());
+// all positive
+
+trace(vel.clone());
+// independent copy
+
+trace(vel.toArray());
+// [x, y] as Array ig
