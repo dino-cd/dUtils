@@ -14,7 +14,7 @@ trace("map(doubleNum) = " + doubled.toString());
 
 `import dUtils.Array.dArray`
 
-Example of Usage:
+Example:
 [example](https://github.com/dino-cd/dUtils/blob/main/dUtils/Array/dmd.txt#L2).<br>
 Output: [output](https://github.com/dino-cd/dUtils/blob/main/dUtils/Array/output.txt)
 
@@ -22,7 +22,7 @@ Output: [output](https://github.com/dino-cd/dUtils/blob/main/dUtils/Array/output
 ---
 ## functions
 ### Sequencer
-Libraries to sequence actions with delays and repeats allowing dynamic usage.
+Libraries to sequence actions with delays and repeats.
 
 ```javascript
 Sequencer.Start(this, function() {
@@ -36,12 +36,12 @@ Sequencer.Start(this, function() {
 
 `import dUtils.functions.Sequencer`
 
-Example of Usage:
+Example:
 [Example](https://github.com/dino-cd/dUtils/blob/main/dUtils/functions/dmd.txt#L2)
 
 ### Vector2D
 
-Vectors Libraries that consist of `magnitude()` `magnitudeSq()` `normalize()` `addLocal(v:Vector2D)` `distanceTo(v:Vector2D)` `angle()` `rotate(rad:Number)` `lerp(v:Vector2D,t:Number)` `negateLocal()` `reflect(normal:Vector2D)` and many other functions to use!
+Vectors Libraries that consist of `magnitude()` `magnitudeSq()` `normalize()` `addLocal(v:Vector2D)` `distanceTo(v:Vector2D)` `angle()` `rotate(rad:Number)` `lerp(v:Vector2D,t:Number)` `negateLocal()` `reflect(normal:Vector2D)` and other functions.
 
 ```javascript
 var a:Vector2D = new Vector2D(1, 0);
@@ -51,5 +51,5 @@ trace(Vector2D.angleBetweenStatic(a, b) * (180 / Math.PI));
 
 `import dUtils.functions.Vector2D`
 
-Example of Usage: [Example](https://github.com/rizalsmpeducationid/dUtils/blob/main/dUtils/functions/exVec.txt)<br>
+Example: [Example](https://github.com/rizalsmpeducationid/dUtils/blob/main/dUtils/functions/exVec.txt)<br>
 Output: [Output](https://github.com/rizalsmpeducationid/dUtils/blob/main/dUtils/functions/exVec.txt)
