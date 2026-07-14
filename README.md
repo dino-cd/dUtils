@@ -53,3 +53,12 @@ trace(Vector2D.angleBetweenStatic(a, b) * (180 / Math.PI));
 
 Example: [Example](https://github.com/rizalsmpeducationid/dUtils/blob/main/dUtils/functions/exVec.txt)<br>
 Output: [Output](https://github.com/rizalsmpeducationid/dUtils/blob/main/dUtils/functions/exVec.txt)
+
+### Installation
+
+Download The [Zip file](https://github.com/dino-cd/dUtils/releases/tag/Monthly) And Simply put the zip inside the FLA directory and extract it. it should looked like
+> a folder
+>> fla.fla
+>> dUtils
+
+use the `import` keyword with the class package you wanted to use.
