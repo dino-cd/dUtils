@@ -54,9 +54,9 @@ trace(Vector2D.angleBetweenStatic(a, b) * (180 / Math.PI));
 Example: [Example](https://github.com/rizalsmpeducationid/dUtils/blob/main/dUtils/functions/exVec.txt)<br>
 Output: [Output](https://github.com/rizalsmpeducationid/dUtils/blob/main/dUtils/functions/exVec.txt)
 
-### dArray
+### dString
 
-28 Array methods.
+28 String methods.
 
 ### Installation
 
